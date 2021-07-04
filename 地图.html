@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>世界地图</title>
+  <style>
+      html, body, .map {
+          height: 100%;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          overflow: hidden;
+      }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css" />
+  <script src="https://js.arcgis.com/4.19/"></script>
+  <script>
+      require(["esri/layers/WebTileLayer", "esri/Map", "esri/views/SceneView"], function(WebTileLayer, Map, SceneView) {
+          var map = new Map({
+              ground: "world-elevation"
+          });
+          var view = new SceneView({
+              container: "map",
+              map: map,
+              zoom: 4,
+              center: [103.572, 36.897]
+          });
+          var tiledLayer = new WebTileLayer({
+              urlTemplate: "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          });
+          map.add(tiledLayer);
+      });
+  </script>
+</head>
+<body>
+<div id="map" class="map"></div>
+</body>
+</html>
